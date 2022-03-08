@@ -19,7 +19,9 @@
   "homepage": "https://github.com/01ddgodwin/Le-Gros-Appetit#readme",
   "dependencies": {
     "body-parser": "^1.19.2",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "heroku": "^7.59.3",
+    "mongodb": "^4.4.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
