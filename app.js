@@ -18,5 +18,6 @@ app.use((req, res, next) => {
 app.use('/feed', feedRoutes);
 
 const PORT = process.env.PORT || 8080;
-
-app.listen(PORT);
+app.listen(PORT, () => {
+  console.warn(`App listening on http://localhost:${PORT}`);
+});
