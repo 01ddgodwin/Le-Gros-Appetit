@@ -7,4 +7,7 @@ const router = express.Router();
 // GET /feed/posts
 router.get('/menu', feedController.getMenu);
 
+// GET /feed/staff
+router.get('/staff', feedController.getStaff);
+
 module.exports = router;
