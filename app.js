@@ -17,4 +17,6 @@ app.use((req, res, next) => {
 
 app.use('/feed', feedRoutes);
 
+app.set('port', process.env.PORT || 8080);
+
 app.listen(8080);
