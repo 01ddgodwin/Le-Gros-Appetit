@@ -1,25 +1,36 @@
 // MENU API
 
+// MENU LAYOUT
+// -Image 
+// -Title
+// -Description
+// -Add To Cart
+
 exports.getMenu = (req, res, next) => {
     res.status(200).json({
         menu: [
             {
+                image: "",
                 item: "Item 1",
                 description: "Item 1 Description!"
             },
             {
+                image: "",
                 item: "Item 2",
                 description: "Item 2 Description!"
             },
             {
+                image: "",
                 item: "Item 3",
                 description: "Item 3 Description!"
             },
             {
+                image: "",
                 item: "Item 4",
                 description: "Item 4 Description!"
             },
             {
+                image: "",
                 item: "Item 5",
                 description: "Item 5 Description!"
             }
@@ -39,6 +50,12 @@ exports.createMenu = (req, res, next) => {
 
 
 // EMPLOYEE API
+
+// STAFF LAYOUT
+// -Name
+// -Description
+// -Username
+// -Password
 
 exports.getStaff = (req, res, next) => {
     res.status(200).json({
