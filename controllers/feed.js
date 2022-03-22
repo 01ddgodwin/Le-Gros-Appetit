@@ -62,23 +62,33 @@ exports.getStaff = (req, res, next) => {
         staff: [
             {
                 item: "Employee 1",
-                description: "Employee 1 Description!"
+                description: "Employee 1 Description!",
+                username: "",
+                password: ""
             },
             {
                 item: "Employee 2",
-                description: "Employee 2 Description!"
+                description: "Employee 2 Description!",
+                username: "",
+                password: ""
             },
             {
                 item: "Employee 3",
-                description: "Employee 3 Description!"
+                description: "Employee 3 Description!",
+                username: "",
+                password: ""
             },
             {
                 item: "Employee 4",
-                description: "Employee 4 Description!"
+                description: "Employee 4 Description!",
+                username: "",
+                password: ""
             },
             {
                 item: "Employee 5",
-                description: "Employee 5 Description!"
+                description: "Employee 5 Description!",
+                username: "",
+                password: ""
             }
         ]
     });
