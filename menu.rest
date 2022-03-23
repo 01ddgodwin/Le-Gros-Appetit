@@ -1,0 +1,28 @@
+GET http://localhost:8080/menu
+
+###
+
+GET http://localhost:8080/menu/623a61bbfd5fd05e379ec838
+
+###
+
+POST http://localhost:8080/menu
+Content-Type: application/json
+
+{
+    "item": "Item 1",
+    "description": "Item 1 Description"
+}
+
+###
+
+DELETE http://localhost:8080/menu/623a606e52be442f0f00dfac
+
+###
+
+PATCH http://localhost:8080/menu/623a61bbfd5fd05e379ec838
+Content-Type: application/json
+
+{
+    "item": "Item 1"
+}

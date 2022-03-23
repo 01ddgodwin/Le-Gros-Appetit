@@ -1,0 +1,40 @@
+GET http://localhost:8080/staff
+
+###
+
+GET http://localhost:8080/staff/623a653a664c28f677b23de9
+
+###
+
+POST http://localhost:8080/staff
+Content-Type: application/json
+
+{
+    "employee": "Employee 1",
+    "description": "Employee 1 Description",
+    "password": "password"
+}
+
+###
+
+DELETE http://localhost:8080/staff/623a653a664c28f677b23de9
+
+###
+
+PATCH http://localhost:8080/staff/623a653a664c28f677b23de9
+Content-Type: application/json
+
+{
+    "employee": "Employee 1"
+}
+
+###
+
+POST http://localhost:8080/staff/login
+Content-Type: application/json
+
+{
+    "employee": "Employee 1",
+    "description": "Employee 1 Description",
+    "password": "password"
+}

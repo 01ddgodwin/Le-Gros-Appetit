@@ -1,7 +1,11 @@
+require('dotenv').config()
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const mongoConnect = require('./util/database');
+const app = express();
+const bcrypt = require('bcrypt')
 const {
   MongoClient,
   ServerApiVersion
@@ -15,75 +19,18 @@ const client = new MongoClient(uri, {
 
 const feedRoutes = require('./routes/feed');
 
-const app = express();
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
+const db = mongoose.connection;
+db.on('error', (error) => console.error(error));
+db.once('open', () => console.log('Connected To Database'));
+
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send("I hear ya");
-});
+const menuRouter = require('./routes/menu');
+app.use('/menu', menuRouter);
 
-//////////////
-// MENU GET AND POST
-/////////////
-
-app.get('/api/menu', (req, res) => {
-  client.connect(err => {
-    const collection = client.db("Le-Gros-Appetit").collection("menu");
-
-    collection.find().toArray((error, documents) => {
-      if (error) {
-        throw error;
-      }
-      res.send(documents);
-    });
-  });
-
-});
-
-app.post('/api/menu', (req, res) => {
-  client.connect(err => {
-    const collection = client.db("Le-Gros-Appetit").collection("menu");
-    collection.insertOne(req.body, (error, result) => {
-      if (error) {
-        throw error;
-      }
-      res.send(result.insertedId);
-    });
-  });
-});
-
-
-//////////////
-// STAFF GET AND POST
-/////////////
-
-app.get('/api/staff', (req, res) => {
-  client.connect(err => {
-    const collection = client.db("Le-Gros-Appetit").collection("staff");
-
-    collection.find().toArray((error, documents) => {
-      if (error) {
-        throw error;
-      }
-      res.send(documents);
-    });
-  });
-
-});
-
-app.post('/api/staff', (req, res) => {
-  client.connect(err => {
-    const collection = client.db("Le-Gros-Appetit").collection("staff");
-    collection.insertOne(req.body, (error, result) => {
-      if (error) {
-        throw error;
-      }
-      res.send(result.insertedId);
-    });
-  });
-});
-
-/////////////////////
+const staffRouter = require('./routes/staff');
+app.use('/staff', staffRouter);
 
 //app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
