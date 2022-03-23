@@ -5,7 +5,7 @@ const app = express();
 
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
-const swaggerAutogen = require('swagger-autogen')();
+//const swaggerAutogen = require('swagger-autogen')();
 const swaggerOptions = {
   swaggerDefinition: {
     info: {
