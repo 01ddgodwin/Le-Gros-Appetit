@@ -14,8 +14,8 @@ const swaggerOptions = {
       contact: {
         name: 'Dillon Godwin'
       },
-      servers: ['http://localhost:8080/']
-      //servers: ["https://le-gros-appetit.herokuapp.com/"]
+      //servers: ['http://localhost:8080/']
+      servers: ["https://le-gros-appetit.herokuapp.com/"]
     },
     tags: [
       {
