@@ -3,13 +3,9 @@
     "info": {
       "version": "1.0.0",
       "title": "My User Project CRUD",
-      "description": "My User Project Application API",
-      "license": {
-        "name": "MIT",
-        "url": "https://opensource.org/licenses/MIT"
-      }
+      "description": "My User Project Application API"
     },
-    "host": "localhost:8000",
+    "host": "localhost:8080",
     "basePath": "/",
     "tags": [
       {
@@ -17,7 +13,5 @@
         "description": "API for users in the system"
       }
     ],
-    "schemes": ["http"],
-    "consumes": ["application/json"],
-    "produces": ["application/json"]
+    "schemes": ["http"]
   }
