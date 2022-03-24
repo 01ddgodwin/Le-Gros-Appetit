@@ -1,5 +1,18 @@
 const dotenv = require('dotenv');
 dotenv.config();
+const mongoose = require('mongoose');
+const mongoConnect = require('./util/database');
+const bcrypt = require('bcrypt')
+const {
+  MongoClient,
+  ServerApiVersion
+} = require('mongodb');
+const uri = "mongodb+srv://dillon:bob112172@le-gros-appetit.xibg7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverApi: ServerApiVersion.v1
+});
 
 const express = require('express');
 const app = express();
@@ -36,19 +49,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const mongoConnect = require('./util/database');
-const bcrypt = require('bcrypt')
-const {
-  MongoClient,
-  ServerApiVersion
-} = require('mongodb');
-const uri = "mongodb+srv://dillon:bob112172@le-gros-appetit.xibg7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-const client = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverApi: ServerApiVersion.v1
-});
 
 const feedRoutes = require('./routes/feed');
 
