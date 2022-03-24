@@ -36,8 +36,8 @@ app.use('/api-docs', serve, setup(swaggerDocs));
 
 import { json as _json, urlencoded } from 'body-parser';
 import { connect, connection } from 'mongoose';
-import mongoConnect from '../util/database.js';
-import bcrypt from 'bcrypt';
+//import mongoConnect from '../util/database.js';
+//import bcrypt from 'bcrypt';
 import { MongoClient, ServerApiVersion } from 'mongodb';
 const uri = "mongodb+srv://dillon:bob112172@le-gros-appetit.xibg7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(uri, {
