@@ -24,8 +24,8 @@ router.get('/:id', getStaff, (req, res) => {
 router.post('/', async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const staff = new Staff({
-        employee: req.body.employee,
-        description: req.body.description,
+        name: req.body.name,
+        position: req.body.position,
         password: hashedPassword
     })
     try {
@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
 
 //Login
 router.post('/login', async (req, res) => {
-    const staff = Staff.find(staff => staff.employee === req.body.employee)
+    const staff = Staff.find(staff => staff.name === req.body.name)
     if (staff == null) {
       return res.status(400).send('Cannot find employee')
     }
@@ -57,11 +57,11 @@ router.post('/login', async (req, res) => {
 
 // Updating One
 router.patch('/:id', getStaff, async (req, res) => {
-    if (req.body.employee != null) {
-        res.staff.employee = req.body.employee
+    if (req.body.name != null) {
+        res.staff.name = req.body.name
     }
-    if (req.body.description != null) {
-        res.staff.description = req.body.description
+    if (req.body.position != null) {
+        res.staff.position = req.body.position
     }
     try {
         const updateStaff = await res.staff.save()
