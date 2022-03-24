@@ -1,10 +1,11 @@
-require('dotenv').config()
+const dotenv = require('dotenv');
+dotenv.config();
 
-import express, { json } from 'express';
+const express = require('express');
 const app = express();
 
-import swaggerJsDoc from 'swagger-jsdoc';
-import { serve, setup } from 'swagger-ui-express';
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 //const swaggerAutogen = require('swagger-autogen')();
 const swaggerOptions = {
   swaggerDefinition: {
@@ -14,8 +15,8 @@ const swaggerOptions = {
       contact: {
         name: 'Dillon Godwin'
       },
-      servers: ['https://localhost:8080/']
-      //servers: ["https://le-gros-appetit.herokuapp.com/"]
+      //servers: ['http://localhost:8080/']
+      servers: ["https://le-gros-appetit.herokuapp.com/"]
     },
     tags: [
       {
@@ -31,14 +32,17 @@ const swaggerOptions = {
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 console.log(swaggerDocs);
-app.use('/api-docs', serve, setup(swaggerDocs));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 
-import { json as _json, urlencoded } from 'body-parser';
-import { connect, connection } from 'mongoose';
-//import mongoConnect from '../util/database.js';
-//import bcrypt from 'bcrypt';
-import { MongoClient, ServerApiVersion } from 'mongodb';
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const mongoConnect = require('./util/database');
+const bcrypt = require('bcrypt')
+const {
+  MongoClient,
+  ServerApiVersion
+} = require('mongodb');
 const uri = "mongodb+srv://dillon:bob112172@le-gros-appetit.xibg7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
@@ -46,16 +50,16 @@ const client = new MongoClient(uri, {
   serverApi: ServerApiVersion.v1
 });
 
-import feedRoutes from './routes/feed';
+const feedRoutes = require('./routes/feed');
 
-connect(process.env.DATABASE_URL, { useNewUrlParser: true })
-const db = connection;
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
+const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected To Database'));
 
-app.use(json());
+app.use(express.json());
 
-import menuRouter from './routes/menu';
+const menuRouter = require('./routes/menu');
 // Getting All Menu Items
 /**
  * @swagger
@@ -151,7 +155,7 @@ import menuRouter from './routes/menu';
  */
 app.use('/menu', menuRouter);
 
-import staffRouter from './routes/staff';
+const staffRouter = require('./routes/staff');
 // Getting All Staff
 /**
  * @swagger
@@ -247,7 +251,7 @@ import staffRouter from './routes/staff';
 app.use('/staff', staffRouter);
 
 //app.use(bodyParser.urlencoded());
-app.use(_json());
+app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -256,7 +260,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(urlencoded({
+app.use(bodyParser.urlencoded({
   extended: true
 }));
 
