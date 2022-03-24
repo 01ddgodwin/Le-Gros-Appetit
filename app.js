@@ -1,10 +1,10 @@
 require('dotenv').config()
 
-const express = require('express');
+import express, { json } from 'express';
 const app = express();
 
-const swaggerJsDoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
+import swaggerJsDoc from 'swagger-jsdoc';
+import { serve, setup } from 'swagger-ui-express';
 //const swaggerAutogen = require('swagger-autogen')();
 const swaggerOptions = {
   swaggerDefinition: {
@@ -31,17 +31,14 @@ const swaggerOptions = {
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 console.log(swaggerDocs);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use('/api-docs', serve, setup(swaggerDocs));
 
 
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const mongoConnect = require('./util/database');
-const bcrypt = require('bcrypt')
-const {
-  MongoClient,
-  ServerApiVersion
-} = require('mongodb');
+import { json as _json, urlencoded } from 'body-parser';
+import { connect, connection } from 'mongoose';
+import mongoConnect from './util/database';
+import bcrypt from 'bcrypt';
+import { MongoClient, ServerApiVersion } from 'mongodb';
 const uri = "mongodb+srv://dillon:bob112172@le-gros-appetit.xibg7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
@@ -49,16 +46,16 @@ const client = new MongoClient(uri, {
   serverApi: ServerApiVersion.v1
 });
 
-const feedRoutes = require('./routes/feed');
+import feedRoutes from './routes/feed';
 
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
-const db = mongoose.connection;
+connect(process.env.DATABASE_URL, { useNewUrlParser: true })
+const db = connection;
 db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected To Database'));
 
-app.use(express.json());
+app.use(json());
 
-const menuRouter = require('./routes/menu');
+import menuRouter from './routes/menu';
 // Getting All Menu Items
 /**
  * @swagger
@@ -154,7 +151,7 @@ const menuRouter = require('./routes/menu');
  */
 app.use('/menu', menuRouter);
 
-const staffRouter = require('./routes/staff');
+import staffRouter from './routes/staff';
 // Getting All Staff
 /**
  * @swagger
@@ -250,7 +247,7 @@ const staffRouter = require('./routes/staff');
 app.use('/staff', staffRouter);
 
 //app.use(bodyParser.urlencoded());
-app.use(bodyParser.json());
+app.use(_json());
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -259,7 +256,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(bodyParser.urlencoded({
+app.use(urlencoded({
   extended: true
 }));
 
