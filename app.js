@@ -17,8 +17,7 @@ const swaggerOptions = {
       //servers: ['http://localhost:8080/']
       servers: ["https://le-gros-appetit.herokuapp.com/"]
     },
-    tags: [
-      {
+    tags: [{
         name: 'Menu'
       },
       {
@@ -51,7 +50,9 @@ const client = new MongoClient(uri, {
 
 const feedRoutes = require('./routes/feed');
 
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
+mongoose.connect(process.env.DATABASE_URL, {
+  useNewUrlParser: true
+})
 const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected To Database'));
@@ -250,7 +251,17 @@ const staffRouter = require('./routes/staff');
 app.use('/staff', staffRouter);
 
 //app.use(bodyParser.urlencoded());
-app.use(bodyParser.json());
+app.use(express.json({
+  limit: '50mb'
+}));
+app.use(bodyParser.json({
+  limit: '50mb',
+  extended: true
+}))
+app.use(bodyParser.urlencoded({
+  limit: '50mb',
+  extended: true
+}))
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -260,7 +271,8 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: true,
+  limit: '50mb'
 }));
 
 app.use('/feed', feedRoutes);

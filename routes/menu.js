@@ -21,7 +21,9 @@ router.get('/:id', getMenu, (req, res) => {
 router.post('/', async (req, res) => {
   const menu = new Menu({
     item: req.body.item,
-    description: req.body.description
+    description: req.body.description,
+    price: req.body.price,
+    image: req.body.image
   })
   try {
     const newMenu = await menu.save()

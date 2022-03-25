@@ -1,3 +1,4 @@
+const { Double } = require('mongodb');
 const mongoose = require('mongoose');
 
 const menuSchema = new mongoose.Schema({
@@ -7,7 +8,15 @@ const menuSchema = new mongoose.Schema({
     },
     description: {
         type: String,
+        required: false
+    },
+    price: {
+        type: String,
         required: true
+    },
+    image: {
+        type: String,
+        required: false
     }
 });
 

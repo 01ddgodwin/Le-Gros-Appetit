@@ -26,7 +26,8 @@ router.post('/', async (req, res) => {
     const staff = new Staff({
         name: req.body.name,
         position: req.body.position,
-        password: hashedPassword
+        password: hashedPassword,
+        image: req.body.image
     })
     try {
         const newStaff = await staff.save()
