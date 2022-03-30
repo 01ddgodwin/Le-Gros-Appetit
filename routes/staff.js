@@ -40,21 +40,21 @@ router.post('/', async (req, res) => {
 })
 
 //Login
-router.post('/login', async (req, res) => {
-    const staff = Staff.find(staff => staff.name === req.body.name)
-    if (staff == null) {
-      return res.status(400).send('Cannot find employee')
+router.post('/login', getStaffByName, async (req, res) => {
+    //const staff = await staff.find(staff => staff.name === req.body.name)
+    if (res.staff == null) {
+        return res.status(400).send('Cannot find employee')
     }
     try {
-      if(await bcrypt.compare(req.body.password, staff.password)) {
-        res.send('Success')
-      } else {
-        res.send('Not Allowed')
-      }
+        if (await bcrypt.compare(req.body.password, res.staff.password)) {
+            res.send('Success')
+        } else {
+            res.send('Not Allowed')
+        }
     } catch {
-      res.status(500).send()
+        res.status(500).send()
     }
-  })
+})
 
 // Updating One
 router.patch('/:id', getStaff, async (req, res) => {
@@ -92,6 +92,25 @@ async function getStaff(req, res, next) {
     let staff
     try {
         staff = await Staff.findById(req.params.id)
+        if (staff == null) {
+            return res.status(404).json({
+                message: 'Cannot find employee'
+            })
+        }
+    } catch (err) {
+        return res.status(500).json({
+            message: err.message
+        })
+    }
+
+    res.staff = staff
+    next()
+}
+
+async function getStaffByName(req, res, next) {
+    let staff
+    try {
+        staff = await staff.find(staff => staff.name === req.body.name)
         if (staff == null) {
             return res.status(404).json({
                 message: 'Cannot find employee'

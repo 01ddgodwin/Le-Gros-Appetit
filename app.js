@@ -25,6 +25,9 @@ const swaggerOptions = {
       },
       {
         name: 'Staff'
+      },
+      {
+        name: 'Orders'
       }
     ]
   },
@@ -252,6 +255,102 @@ const staffRouter = require('./routes/staff');
  *              description: Error
  */
 app.use('/staff', staffRouter);
+
+const orderRouter = require('./routes/orders');
+// Getting All Orders
+/**
+ * @swagger
+ * /orders:
+ *  get:
+ *      tags:
+ *      - "Orders"
+ *      description: Use to request all orders
+ *      responses: 
+ *          '200':
+ *              description: Successful
+ *          '500':
+ *              description: Error
+ */
+
+//Get Order By Id
+/**
+ * @swagger
+ * /order/{id}:
+ *  get:
+ *      tags:
+ *      - "Orders"
+ *      description: Use to request one order by id
+ *      parameters:
+ *      - name: "id"
+ *        in: path
+ *        required: true
+ *      responses: 
+ *          '200':
+ *              description: Successful
+ *          '500':
+ *              description: Error
+ */
+
+
+// Create Order
+/**
+ * @swagger
+ * /orders:
+ *  post:
+ *      tags:
+ *      - "Orders"
+ *      description: Create a new order
+ *      parameters:
+ *      - in: "body"
+ *        name: "body"
+ *      responses: 
+ *          '200':
+ *              description: Created
+ *          '400':
+ *              description: Error
+ */
+
+// Update Order
+/**
+ * @swagger
+ * /orders/{id}:
+ *  patch:
+ *      tags:
+ *      - "Orders"
+ *      description: Use to update order
+ *      parameters:
+ *      - name: "id"
+ *        in: path
+ *        required: true
+ *      - in: body
+ *        name: body
+ *        required: true
+ *      responses: 
+ *          '200':
+ *              description: Successful
+ *          '500':
+ *              description: Error
+ */
+
+// Delete Order
+/**
+ * @swagger
+ * /orders/{id}:
+ *  delete:
+ *      tags:
+ *      - "Orders"
+ *      description: Use to delete order
+ *      parameters:
+ *      - name: "id"
+ *        in: path
+ *        required: true
+ *      responses: 
+ *          '200':
+ *              description: Successful
+ *          '500':
+ *              description: Error
+ */
+app.use('/orders', orderRouter);
 
 //app.use(bodyParser.urlencoded());
 app.use(express.json({

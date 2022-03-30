@@ -1,0 +1,29 @@
+GET http://localhost:8080/orders
+
+###
+
+GET http://localhost:8080/orders/6244ad10868a05d70e3d240a
+
+###
+
+POST http://localhost:8080/orders
+Content-Type: application/json
+
+{
+    "name": "Paul Bocuse",
+    "quantity": "1",
+    "address": "Rexburg "
+}
+
+###
+
+DELETE http://localhost:8080/orders/623a653a664c28f677b23de9
+
+###
+
+PATCH http://localhost:8080/orders/623a653a664c28f677b23de9
+Content-Type: application/json
+
+{
+    "employee": "Employee 1"
+}
