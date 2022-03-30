@@ -21,6 +21,7 @@ router.get('/', async (req, res) => {
   router.post('/', async (req, res) => {
     const order = new Order({
       name: req.body.name,
+      items: req.body.items,
       quantity: req.body.quantity,
       address: req.body.address
     })

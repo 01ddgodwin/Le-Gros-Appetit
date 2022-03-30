@@ -37,3 +37,11 @@ Content-Type: application/json
     "name": "Alain Ducasse",
     "password": "alainPassword"
 }
+
+//Passwords
+
+# Alain Ducasse: alainPassword
+# Paul Bocuse: paulPassword
+# Ann-Sophie Pic: annPassword
+# Auguste Escoffier: augustePassword
+# Guy Savoy: guyPassword
