@@ -26,6 +26,7 @@ router.post('/', async (req, res) => {
     const staff = new Staff({
         name: req.body.name,
         position: req.body.position,
+        username: req.body.username,
         password: hashedPassword,
         image: req.body.image
     })
