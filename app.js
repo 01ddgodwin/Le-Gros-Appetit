@@ -49,7 +49,7 @@ const {
   MongoClient,
   ServerApiVersion
 } = require('mongodb');
-const uri = "mongodb+srv://dillon:bob112172@le-gros-appetit.lgcybio.mongodb.net/le-gros-appetit?retryWrites=true&w=majority";
+const uri = "mongodb+srv://dillon:bob112172@le-gros-appetit.lgcybio.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
