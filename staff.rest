@@ -45,3 +45,13 @@ Content-Type: application/json
 # Ann-Sophie Pic: annPassword
 # Auguste Escoffier: augustePassword
 # Guy Savoy: guyPassword
+
+###
+
+POST http://localhost:8080/signup
+
+{
+    "id": "1",
+    "username": "alain",
+    "password": "alainPassword"
+}

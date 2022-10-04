@@ -20,6 +20,9 @@ const staffSchema = new mongoose.Schema({
     image: {
         type: String,
         required: false
+    },
+    token: {
+        type: String
     }
 });
 

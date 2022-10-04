@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
         username: req.body.username,
         password: hashedPassword,
         image: req.body.image
-    })
+    });
     try {
         const newStaff = await staff.save()
         res.status(201).json(newStaff)

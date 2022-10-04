@@ -3,7 +3,9 @@ const dotenv = require('dotenv').config();
 const express = require('express');
 var cors = require('cors');
 const app = express();
-app.use(cors())
+const jwt = require('jsonwebtoken');
+app.use(cors());
+
 
 
 const swaggerJsDoc = require('swagger-jsdoc');
@@ -47,7 +49,7 @@ const {
   MongoClient,
   ServerApiVersion
 } = require('mongodb');
-const uri = "mongodb+srv://dillon:bob112172@le-gros-appetit.xibg7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = "mongodb+srv://dillon:bob112172@le-gros-appetit.lgcybio.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -352,7 +354,6 @@ const orderRouter = require('./routes/orders');
  */
 app.use('/orders', orderRouter);
 
-//app.use(bodyParser.urlencoded());
 app.use(express.json({
   limit: '50mb'
 }));
